@@ -44,6 +44,18 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java-library"
+    
+    test {
+        useJUnitPlatform()
+
+        sourceSets {
+            test {
+                java {
+                    srcDirs = ['src/']
+                }
+            }
+        }
+    }
 
 
     dependencies {
@@ -52,6 +64,8 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 
     }
 }
@@ -59,6 +73,17 @@ project(":desktop") {
 project(":core") {
     apply plugin: "java-library"
 
+    test {
+        useJUnitPlatform()
+        sourceSets {
+            test {
+                java {
+                    srcDirs = ['src/']
+                }
+            }
+        }
+
+    }
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -66,5 +91,8 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-ai:1.8.1"
         implementation 'com.google.code.gson:gson:2.8.6'
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     }
 }
+
