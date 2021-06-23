@@ -4,7 +4,7 @@ HUD Z:37
 				this.usePixelSystem = b;
 			}
 ```
-Warum gibt es kein getPixelSystem? Man kann nicht prüfen, welchen Wert die Variable hat
+Warum gibt es kein getPixelSystem? Man kann nicht prüfen, welchen Wert die Variable hat  
 Könnte man nicht stattdessen:
 ```
 		public void draw(boolean usePixelSystem) {
@@ -19,7 +19,7 @@ Könnte man nicht stattdessen:
 ```
 machen? Damit hat der Tester Kontrolle über die Variable
 
-Außerdem sollte der Kontruktor keine Objekte mit new anlegen. Das verhindert das Mocken der Objekte, die sich beim Funktionsaufruf verändern
+Außerdem sollte der Konstruktor keine Objekte mit new anlegen. Das verhindert das Mocken der Objekte, die sich beim Funktionsaufruf verändern
 ```
 		public HUD() {
 				hudBatch = new SpriteBatch();
@@ -38,3 +38,7 @@ Außerdem sollte der Kontruktor keine Objekte mit new anlegen. Das verhindert da
 				hudElements = new ArrayList<>();
 			}
 ```
+
+Point Konstruktoren (Coordinate und Point and Input)
+`IllegalArgumentExeption` für Parameter die `null` sind
+float Variablen können nicht `null` sein. Daher hier nicht nötig
