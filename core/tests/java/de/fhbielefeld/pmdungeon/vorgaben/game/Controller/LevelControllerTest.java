@@ -2,8 +2,11 @@ package de.fhbielefeld.pmdungeon.vorgaben.game.Controller;
 
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.DungeonWorld;
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.tiles.Tile;
+import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
@@ -20,56 +23,77 @@ class LevelControllerTest {
      * Create MainController?
      * **/
     LevelController lc;
-    @BeforeAll
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        Method m1 = Mockito.mock(Method.class);
-        Object klass = Mockito.mock(Object.class);
-        Object[] args = Mockito.mock(Object[].class);
-        LevelController lc = new LevelController(m1,klass, args);
+
+    public void onLevelLoad() {
     }
+    @BeforeEach
+    public void init() throws NoSuchMethodException {
+        MockitoAnnotations.initMocks(this);
+        Method functionToPass = this.getClass().getMethod("onLevelLoad");
+        Object[] arguments = new Object[0];
+        lc = new LevelController(functionToPass,this, arguments);
+    }
+
 
     
     @Test
     void loadDungeonWithDungeon() throws InvocationTargetException, IllegalAccessException {
 
         //MOckito von dungeonWorld ??
-        DungeonWorld dw = Mockito.mock(DungeonWorld.class);
+/*        DungeonWorld dw = Mockito.mock(DungeonWorld.class);
         Tile tl = Mockito.mock(Tile.class);
 
         lc.loadDungeon(dw);
 
-        assertEquals(dw.getConnections(tl), true);
+        assertEquals(dw.getConnections(tl), true);*/
+
+        //when(dungeon.makeConnections()).thenReturn();
     }
 
-/*    @Test
+    @Test
     void loadDungeonWithNull() throws InvocationTargetException, IllegalAccessException {
 
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, lc.loadDungeon(null));
-    }*/
+        assertThrows(NullPointerException.class, () -> lc.loadDungeon(null));
+    }
 
+    // nicht möglich
 /*    @Test
     void loadDungeonWithOtherObject() {
 
         Object mh = new Object();
 
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, lc.loadDungeon(mh));
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()->lc.loadDungeon(mh));
     }*/
 
     @Test
-    void updateStageNichtÄndern() {
+    void updateStageNotChangeStage() {
 
         lc.update();
     }
 
     @Test
-    void updateStageÄndern() {
+    void updateStageChangeStage() {
         lc.triggerNextStage();
         lc.update();
     }
 
     @Test
     void checkForTriggerWithTriggerField() {
+
+        DungeonWorld dungeon = mock(DungeonWorld.class);
+
+       // when(dungeon.getNextLevelTrigger().getX()).thenReturn(10);
+        when(dungeon.getNextLevelTrigger().getX()).thenReturn(20);
+        try {
+            lc.loadDungeon(dungeon);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        Point p = new Point(10, 20);
+
+        lc.checkForTrigger(p);
     }
 
     @Test
@@ -78,5 +102,8 @@ class LevelControllerTest {
 
     @Test
     void checkForTriggerWithNull() {
+
+        assertThrows(NullPointerException.class,() ->lc.checkForTrigger(null));
+
     }
 }
