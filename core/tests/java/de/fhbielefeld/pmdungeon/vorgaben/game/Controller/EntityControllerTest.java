@@ -23,6 +23,7 @@ import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IEntity;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.opentest4j.AssertionFailedError;
 
 @RunWith(JUnitPlatform.class)
 class EntityControllerTest {
@@ -218,8 +219,8 @@ public abstract class Character implements IEntity, IAnimatable {
         assertEquals(0,ec.getList().size());
         
         ec.addEntity(null);
-        
-        assertEquals(0,ec.getList().size());
+
+        assertThrows(AssertionFailedError.class,() -> assertEquals(0,ec.getList().size()));
 
     }
 
