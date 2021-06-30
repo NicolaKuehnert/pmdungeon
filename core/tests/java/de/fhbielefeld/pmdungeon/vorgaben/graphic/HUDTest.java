@@ -1,8 +1,17 @@
 package de.fhbielefeld.pmdungeon.vorgaben.graphic;
 
+import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
+
+import com.badlogic.gdx.graphics.Texture;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IHUDElement;
 
@@ -40,6 +49,7 @@ class HUDTest {
     @Test 
     void removeHudElementThrowsNoExceptionWithoutAddedObject() {
         HUD hud = new HUD();
+        IHUDElement element = mock(IHUDElement.class);
 
         hud.removeHudElement(element);
     }
@@ -53,8 +63,8 @@ class HUDTest {
         Point p = new Point(20,20);
 
         when(element.getTexture()).thenReturn(texture);
-        when(element.getWidth()).thenReturn(4);
-        when(element.getHeight()).thenReturn(4);
+        when(element.getWidth()).thenReturn(4.0F);
+        when(element.getHeight()).thenReturn(4.0F);
         when(element.getPosition()).thenReturn(p);
 
         when(texture.getWidth()).thenReturn(4);

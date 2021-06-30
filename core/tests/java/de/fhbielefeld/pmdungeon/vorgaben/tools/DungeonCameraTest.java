@@ -1,8 +1,13 @@
 package de.fhbielefeld.pmdungeon.vorgaben.tools;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
+
+import com.badlogic.gdx.graphics.Texture;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IDrawable;
 
@@ -50,7 +55,7 @@ class DungeonCameraTest {
         dc.update();
 
         dc.setFocusPoint(null);
-        dc.follo(null);
+        dc.follow(null);
 
         dc.update();
     }

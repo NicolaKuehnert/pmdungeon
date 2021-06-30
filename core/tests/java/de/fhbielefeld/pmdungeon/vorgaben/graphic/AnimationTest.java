@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.graphics.Texture;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +36,7 @@ class AnimationTest {
     void createAnimationObjectWithEmptyList() {
         List<Texture> t = new ArrayList<>();
 
-        assertThrows(IllegalArgumentException, new Animation(t, 3));
+        assertThrows(IllegalArgumentException.class, () -> new Animation(t, 3));
     }
 
     @Test 
@@ -48,7 +51,7 @@ class AnimationTest {
         t.add(t2);
         t.add(t3);
 
-        assertThrows(IllegalArgumentException, new Animation(t, -2));
+        assertThrows(IllegalArgumentException.class, ()->new Animation(t, -2));
     }
 
     @Test 
