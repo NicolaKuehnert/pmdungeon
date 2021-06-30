@@ -1,29 +1,18 @@
 package de.fhbielefeld.pmdungeon.vorgaben.game.Controller;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.Animation;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 import de.fhbielefeld.pmdungeon.vorgaben.dungeonCreator.DungeonWorld;
-import de.fhbielefeld.pmdungeon.vorgaben.graphic.Animation;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IAnimatable;
 import de.fhbielefeld.pmdungeon.vorgaben.interfaces.IEntity;
-import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
-import org.opentest4j.AssertionFailedError;
 
 @RunWith(JUnitPlatform.class)
 class EntityControllerTest {
@@ -190,7 +179,7 @@ public abstract class Character implements IEntity, IAnimatable {
         ec.addEntity(cr3);
         ec.addEntity(cr4);
         
-        assertEquals(ec.getList().size(), 4);
+        assertEquals(4, ec.getList().size());
 
     }
 
@@ -220,8 +209,8 @@ public abstract class Character implements IEntity, IAnimatable {
         
         ec.addEntity(null);
 
-        assertThrows(AssertionFailedError.class,() -> assertEquals(0,ec.getList().size()));
-
+        //assertThrows(AssertionFailedError.class,() -> assertEquals(0,ec.getList().size()));
+        assertEquals(0,ec.getList().size());
     }
 
     @Test
