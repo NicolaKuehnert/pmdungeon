@@ -1,6 +1,5 @@
 package de.fhbielefeld.pmdungeon.vorgaben.interfaces;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.Animation;
 import org.junit.jupiter.api.Test;

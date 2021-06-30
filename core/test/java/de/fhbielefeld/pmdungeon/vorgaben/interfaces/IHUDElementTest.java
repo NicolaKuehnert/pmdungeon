@@ -1,14 +1,8 @@
 package de.fhbielefeld.pmdungeon.vorgaben.interfaces;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 
