@@ -1,5 +1,4 @@
 package de.fhbielefeld.pmdungeon.vorgaben.graphic;
-
 import com.badlogic.gdx.graphics.Texture;
 
 import java.util.List;
