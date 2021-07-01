@@ -2,6 +2,7 @@ package de.fhbielefeld.pmdungeon.vorgaben.interfaces;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.fhbielefeld.pmdungeon.vorgaben.graphic.Animation;
+import de.fhbielefeld.pmdungeon.vorgaben.tools.Point;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,8 +23,19 @@ class IAnimatableTest {
 
         Animation anim = new Animation(idleLeftTextures, 1);
 
-        IAnimatable elm = mock(IAnimatable.class);
-        when(elm.getTexture()).thenReturn(il1);
+        IAnimatable elm = new IAnimatable() {
+            @Override
+            public Animation getActiveAnimation() {
+                return anim;
+
+            }
+
+            @Override
+            public Point getPosition() {
+                return null;
+            }
+        };
+
 
         assertEquals(elm.getTexture(), anim.getNextAnimationTexture());
     }
