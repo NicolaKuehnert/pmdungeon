@@ -2,6 +2,7 @@ package de.fhbielefeld.pmdungeon.vorgaben.interfaces;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Null;
 import de.fhbielefeld.pmdungeon.desktop.DesktopLauncher;
 import de.fhbielefeld.pmdungeon.vorgaben.game.Controller.MainController;
 import de.fhbielefeld.pmdungeon.vorgaben.game.GameSetup;
@@ -17,17 +18,18 @@ class IDrawableTest {
 
     @BeforeAll
     static void setup(){
-        DesktopLauncher.run(new MainController());
-
-        GameSetup.batch = new SpriteBatch();
+        MainController mc = new MainController();
+        DesktopLauncher.run(mc);
 
     }
 
     @Test
     void draw() {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         Texture tx = new Texture("./test/resources/assets/textures/items/flask_big_green.png");
 
-        IDrawable elm = new IDrawable() {
+
+        IDrawable elm = spy(new IDrawable() {
             @Override
             public Point getPosition() {
                 return null;
@@ -37,15 +39,14 @@ class IDrawableTest {
             public Texture getTexture() {
                 return tx;
             }
-        };
+        });
         elm.draw();
 
-        //how do we check this again?
     }
 
     @Test
     void drawOffsetAndScaling() {
-        Texture tx = mock(Texture.class);
+        Texture tx = new Texture("./test/resources/assets/textures/items/flask_big_green.png");
 
         IDrawable elm = new IDrawable() {
             @Override
@@ -67,7 +68,7 @@ class IDrawableTest {
 
     @Test
     void drawNegativeValues() {
-        Texture tx = mock(Texture.class);
+        Texture tx = new Texture("./test/resources/assets/textures/items/flask_big_green.png");
 
         IDrawable elm = new IDrawable() {
             @Override
@@ -86,9 +87,18 @@ class IDrawableTest {
 
     @Test
     void drawNull() {
-        IDrawable elm = mock(IDrawable.class);
-        when(elm.getTexture()).thenReturn(null);
+        IDrawable elm = new IDrawable() {
+            @Override
+            public Point getPosition() {
+                return null;
+            }
 
-        elm.draw(10.f, 10.f, 2.0f, 2.0f);
+            @Override
+            public Texture getTexture() {
+                return null;
+            }
+        };
+
+        NullPointerException ex = assertThrows(NullPointerException.class,() -> elm.draw(10.f, 10.f, 2.0f, 2.0f));
     }
 }
