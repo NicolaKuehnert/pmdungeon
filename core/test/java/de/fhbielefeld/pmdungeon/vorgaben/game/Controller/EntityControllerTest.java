@@ -161,6 +161,24 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
+    public void addEntityOneEntity() {
+
+        float movementspeed = 10;
+        int maxLifepoints = 20;
+        int dmg= 10;
+
+        MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
+
+        System.out.println("Listsize: " + ec.getList().size());
+
+        ec.addEntity(cr1);
+
+        assertEquals(1, ec.getList().size());
+        assertEquals(cr1, ec.getList().get(0));
+
+    }
+
+    @Test
     public void addEntityXEntitys() {
 
         float movementspeed = 10;
@@ -172,14 +190,18 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero cr3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero cr4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
         
         ec.addEntity(cr1);
         ec.addEntity(cr2);
         ec.addEntity(cr3);
         ec.addEntity(cr4);
-        
-        assertEquals(4, ec.getList().size());
+
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(cr1, ec.getList().get(0));
+        assertEquals(cr2, ec.getList().get(1));
+        assertEquals(cr3, ec.getList().get(2));
+        assertEquals(cr4, ec.getList().get(3));
 
     }
 
@@ -192,25 +214,28 @@ public abstract class Character implements IEntity, IAnimatable {
 
         MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(ec.getList().size(), 0);
+        System.out.println("Listsize: " + ec.getList().size());
         
         ec.addEntity(cr1);
         ec.addEntity(cr1);
         ec.addEntity(cr1);
 
-        assertEquals(1,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(cr1, ec.getList().get(0));
+
 
     }
 
     @Test
     public void addEntityNull() {
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
         
         ec.addEntity(null);
 
         //assertThrows(AssertionFailedError.class,() -> assertEquals(0,ec.getList().size()));
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+        assertNotEquals(null, ec.getList().get(0));
     }
 
     @Test
@@ -222,7 +247,7 @@ public abstract class Character implements IEntity, IAnimatable {
 
         MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
 
@@ -233,7 +258,7 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
-    public void removeEntityXTimes() {
+    public void removeEntity4Entitys() {
 
         float movementspeed = 10;
         int maxLifepoints = 20;
@@ -244,7 +269,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero cr3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero cr4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
         ec.addEntity(cr2);
@@ -269,7 +294,7 @@ public abstract class Character implements IEntity, IAnimatable {
 
         MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
 
@@ -283,13 +308,56 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
-    public void removeEntityNull() {
+    public void removeEntityAddTwoThenDeleteOne() {
 
-        assertEquals(0,ec.getList().size());
+        float movementspeed = 10;
+        int maxLifepoints = 20;
+        int dmg= 10;
+
+        MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
+        MyHero cr2 = new MyHero(movementspeed, maxLifepoints, dmg);
+
+        System.out.println("Listsize: " + ec.getList().size());
+
+        ec.addEntity(cr1);
+        ec.addEntity(cr2);
+
+        ec.removeEntity(cr1);
+
+
+        System.out.println("Listsize: " + ec.getList().size());
+
+        assertEquals(cr2, ec.getList().get(0));
+
+    }
+
+    @Test
+    public void removeEntityNullListSizeOne () {
+
+        float movementspeed = 10;
+        int maxLifepoints = 20;
+        int dmg= 10;
+
+        MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
+        System.out.println("Listsize: " + ec.getList().size());
+
+        ec.addEntity(cr1);
+        ec.removeEntity(null);
+
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(cr1, ec.getList().get(0));
+
+    }
+
+    @Test
+    public void removeEntityNullClearList() {
+
+
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.removeEntity(null);
 
-        assertEquals(0,ec.getList().size());
+        assertEquals(0, ec.getList().size());
 
     }
 
@@ -303,7 +371,7 @@ public abstract class Character implements IEntity, IAnimatable {
 
         MyHero cr1 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
 
@@ -313,7 +381,7 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
-    public void removeAllXEntitys() {
+    public void removeAll4Entitys() {
 
         float movementspeed = 10;
         int maxLifepoints = 20;
@@ -324,7 +392,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero cr3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero cr4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
         ec.addEntity(cr2);
@@ -339,7 +407,7 @@ public abstract class Character implements IEntity, IAnimatable {
     @Test
     public void removeAllNothing() {
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.removeAll();
 
@@ -358,7 +426,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero cr3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero cr4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(cr1);
         ec.addEntity(cr2);
@@ -387,7 +455,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero2 cry3 = new MyHero2(movementspeed, maxLifepoints, dmg);
         MyHero2 cry4 = new MyHero2(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(crz1);
         ec.addEntity(crz2);
@@ -401,13 +469,18 @@ public abstract class Character implements IEntity, IAnimatable {
 
         ec.removeAllFrom(crz1.getClass());
 
-        assertEquals(4,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+
+        assertEquals(cry1, ec.getList().get(0));
+        assertEquals(cry2, ec.getList().get(1));
+        assertEquals(cry3, ec.getList().get(2));
+        assertEquals(cry4, ec.getList().get(3));
     }
 
     @Test
     public void removeAllFromNull() {
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.removeAllFrom(null);
 
@@ -431,7 +504,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero2 cry3 = new MyHero2(movementspeed, maxLifepoints, dmg);
         MyHero2 cry4 = new MyHero2(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(crz1);
         ec.addEntity(crz2);
@@ -445,11 +518,11 @@ public abstract class Character implements IEntity, IAnimatable {
 
         assertThrows(NullPointerException.class, () -> ec.removeAllFrom(null));
 
-        assertEquals(8,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
     }
 
     @Test
-    public void updateXNichtDeleteable() {
+    public void update4NichtDeleteable() {
 
         float movementspeed = 10;
         int maxLifepoints = 20;
@@ -460,7 +533,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero crz3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero crz4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(crz1);
         ec.addEntity(crz2);
@@ -474,7 +547,7 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
-    public void updateXDeleteable() {
+    public void update4Deleteable() {
 
         float movementspeed = 10;
         int maxLifepoints = 20;
@@ -485,7 +558,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero crz3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero crz4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
         //make deleatable
         crz1.takeDmg(20);
         crz2.takeDmg(20);
@@ -518,7 +591,8 @@ public abstract class Character implements IEntity, IAnimatable {
 
         ec.update();
 
-        assertEquals(1,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(crz1, ec.getList().get(0));
 
     }
 
@@ -562,7 +636,8 @@ public abstract class Character implements IEntity, IAnimatable {
 
         ec.update();
 
-        assertEquals(1,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(crz1, ec.getList().get(0));
 
     }
 
@@ -575,7 +650,7 @@ public abstract class Character implements IEntity, IAnimatable {
 
         MyHero crz1 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
         
         ec.addEntity(crz1);
         //make deleatable
@@ -588,7 +663,7 @@ public abstract class Character implements IEntity, IAnimatable {
     }
 
     @Test
-    public void updateXEntityFromDeleteableToNichtDeleatable() {
+    public void update4EntityFromDeleteableToNichtDeleatable() {
 
         float movementspeed = 10;
         int maxLifepoints = 20;
@@ -599,7 +674,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero crz3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero crz4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
         //make deleatable
         crz1.takeDmg(20);
         crz2.takeDmg(20);
@@ -618,7 +693,11 @@ public abstract class Character implements IEntity, IAnimatable {
 
         ec.update();
 
-        assertEquals(4,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
+        assertEquals(crz1, ec.getList().get(0));
+        assertEquals(crz2, ec.getList().get(1));
+        assertEquals(crz3, ec.getList().get(2));
+        assertEquals(crz4, ec.getList().get(3));
 
     }
 
@@ -634,7 +713,7 @@ public abstract class Character implements IEntity, IAnimatable {
         MyHero crz3 = new MyHero(movementspeed, maxLifepoints, dmg);
         MyHero crz4 = new MyHero(movementspeed, maxLifepoints, dmg);
 
-        assertEquals(0,ec.getList().size());
+        System.out.println("Listsize: " + ec.getList().size());
 
         ec.addEntity(crz1);
         ec.addEntity(crz2);
